@@ -5,3 +5,17 @@ export const selectUser = (user) => {
         payload: user
     }
 };
+export const addTodo = (task) => {
+    console.log("Add todo task : ", task);
+    return {
+        type: 'ADD_TODO',
+        payload: task
+    }
+};
+export const completeTask = (taskId) => {
+    console.log("completeTask : ", taskId);
+    return {
+        type: 'COMPLETE_TASK',
+        payload: taskId
+    }
+};
