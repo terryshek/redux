@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+
 import { addTodo, completeTask } from '../actions/index'
 
 const myStyle = {
     "textDecoration": "line-through"
 }
 class TodoList extends Component {
+    componentDidMount(){
+        console.log("done")
+
+    }
     constructor(props) {
         super(props);
         this.state = {

@@ -2,8 +2,13 @@
  * The users reducer will always return an array of users no matter what
  * You need to return something, so if there are no users then just return an empty array
  * */
+import Q from "q";
+import axios from 'axios';
+import {data} from '../mock-data/dataSouce.js';
+
 let nextTodoId = 4
-export default (state = originTask, action) =>{
+export default (state = data, action) =>{
+
     switch (action.type) {
         case 'ADD_TODO':
             console.log("action : 'ADD_TODO'")
@@ -42,5 +47,19 @@ const originTask = [
             complete:false,
             assigner:"terry"
         },
-        ]
+]
+const getData = () =>{
+    let deferred = Q.defer();
+    axios.get('https://api.github.com/users')
+        .then(function (response) {
+            if(response.status== 200){
+                console.log(response)
+                deferred.resolve(response.data);
+            }
+        })
+        .catch(function (error) {
+            deferred.reject(new Error(error));
+        });
+    return deferred.promise;
+}
 
