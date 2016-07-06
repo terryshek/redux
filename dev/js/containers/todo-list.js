@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import { addTodo, completeTask } from '../actions/index'
+import { addTodo, completeTask, fetchPosts } from '../actions/index'
+import { getData } from "../mock-data/initialData"
 
 const myStyle = {
     "textDecoration": "line-through"
 }
 class TodoList extends Component {
-    componentDidMount(){
-        console.log("done")
-
+    componentWillMount(){
+        console.log(this.props)
+        this.props.fetchPosts('https://api.github.com/users');
     }
     constructor(props) {
         super(props);
@@ -75,7 +76,7 @@ function mapStateToProps(state) {
 // Get actions and pass them as props to to UserList
 //      > now UserList has this.props.selectUser
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({addTodo: addTodo,completeTask:completeTask }, dispatch);
+    return bindActionCreators({addTodo: addTodo,completeTask:completeTask, fetchPosts:fetchPosts }, dispatch);
 }
 
 // We don't want to return the plain UserList (component) anymore, we want to return the smart Container
