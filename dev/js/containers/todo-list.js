@@ -26,17 +26,17 @@ class TodoList extends Component {
     renderData() {
         return this.props.todos.map((list, index) => {
             return (
-                <li className="media" key={list.id}>
-                    <div className="media-left">
-                        <a href="#" className="thumbnail">
-                            <img  src={list.avatar_url} alt="avatar_url" />
-                        </a>
-                    </div>
-                    <div className="media-body">
-                        <h4 className="media-heading">{list.login}</h4>
-                        <p>{list.html_url}</p>
-                    </div>
-                </li>
+               <li className="media" key={list.id}>
+                <div className="media-left">
+                    <img src={list.avatar_url} alt="avatar_url" className="media-object" width="64px"/>
+                </div>
+                <div className="media-body">
+                    <h4 className="media-heading">{list.login}</h4>
+                    <a href={list.html_url}> 
+                        {list.html_url}
+                    </a>
+                </div>
+            </li> 
             );
         })
     }
@@ -60,7 +60,7 @@ class TodoList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <div className="row">
                     <div className="input-group">
                         <input type="text" className="form-control" onChange={this.changeContent.bind(this)} placeholder="Search for..." />
@@ -70,11 +70,6 @@ class TodoList extends Component {
                     </div>
                 </div>
                 <br/>
-                <div className="row">
-                    <ul className="list-group">
-                        {this.renderList()}
-                    </ul>
-                </div>
                 <div className="row">
                     <ul className="media-list">
                         {this.renderData()}

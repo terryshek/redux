@@ -6,20 +6,12 @@ import TodoList from '../containers/todo-list';
 require('../../scss/style.scss');
 
 const App = () => (
-    <div className="row">
-        <div className="col col-xs-12 col-md-4">
-            <h2>User List</h2>
-            <UserList />
+        <div className="row">
+            <div className="col col-xs-12 col-md-4 col-md-offset-4 ">
+                <h2>GitHub List</h2>
+                <TodoList />
+            </div>
         </div>
-        <div className="col col-xs-12 col-md-4">
-            <h2>Todo List</h2>
-            <TodoList />
-        </div>
-        <div className="col col-xs-12 col-md-4">
-            <h2>User Details</h2>
-            <UserDetails />
-        </div>
-    </div>
 );
 
 export default App;
