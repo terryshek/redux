@@ -23,6 +23,23 @@ class TodoList extends Component {
         this.setState({task: e.target.value})
         console.log(this.state)
     }
+    renderData() {
+        return this.props.todos.map((list, index) => {
+            return (
+                <li className="media" key={list.id}>
+                    <div className="media-left">
+                        <a href="#" className="thumbnail">
+                            <img  src={list.avatar_url} alt="avatar_url" />
+                        </a>
+                    </div>
+                    <div className="media-body">
+                        <h4 className="media-heading">{list.login}</h4>
+                        <p>{list.html_url}</p>
+                    </div>
+                </li>
+            );
+        })
+    }
 
 
     renderList() {
@@ -57,35 +74,11 @@ class TodoList extends Component {
                     <ul className="list-group">
                         {this.renderList()}
                     </ul>
-                    <table className="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                </div>
+                <div className="row">
+                    <ul className="media-list">
+                        {this.renderData()}
+                    </ul>
                 </div>
             </div>
 
