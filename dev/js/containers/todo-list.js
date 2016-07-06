@@ -9,34 +9,34 @@ const myStyle = {
     "textDecoration": "line-through"
 }
 class TodoList extends Component {
-    componentWillMount(){
+    componentWillMount() {
         console.log(this.props)
         this.props.fetchPosts('https://api.github.com/users');
     }
     constructor(props) {
         super(props);
         this.state = {
-            task:""
+            task: ""
         };
     }
     changeContent(e) {
-        this.setState({task: e.target.value})
+        this.setState({ task: e.target.value })
         console.log(this.state)
     }
     renderData() {
         return this.props.todos.map((list, index) => {
             return (
-               <li className="media" key={list.id}>
-                <div className="media-left">
-                    <img src={list.avatar_url} alt="avatar_url" className="media-object" width="64px"/>
-                </div>
-                <div className="media-body">
-                    <h4 className="media-heading">{list.login}</h4>
-                    <a href={list.html_url}> 
-                        {list.html_url}
-                    </a>
-                </div>
-            </li> 
+                <li className="media" key={list.id}>
+                    <div className="media-left">
+                        <img src={list.avatar_url} alt="avatar_url" className="media-object" width="64px"/>
+                    </div>
+                    <div className="media-body">
+                        <h4 className="media-heading">{list.login}</h4>
+                        <a href={list.html_url}>
+                            {list.html_url}
+                        </a>
+                    </div>
+                </li>
             );
         })
     }
@@ -46,13 +46,13 @@ class TodoList extends Component {
         console.log(this.props)
         return this.props.todos.map((todo, index) => {
             return (
-                <li className="list-group-item" style={todo.complete?myStyle:{}}
+                <li className="list-group-item" style={todo.complete ? myStyle : {}}
                     key={todo.id}
                     >
-                    <button onClick={() => this.props.completeTask(todo.id)} type="button" className="btn btn-primary btn-xs pull-left">Complete</button>
+                    <button onClick={() => this.props.completeTask(todo.id) } type="button" className="btn btn-primary btn-xs pull-left">Complete</button>
 
-                    <span className="badge">{todo.complete? "true":"false"}</span>
-                    <div>{todo.tasks} -- assigner : {todo.assigner}</div>
+                    <span className="badge">{todo.complete ? "true" : "false"}</span>
+                    <div>{todo.tasks} --assigner: {todo.assigner}</div>
                 </li>
             );
         });
@@ -60,22 +60,15 @@ class TodoList extends Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="input-group">
-                        <input type="text" className="form-control" onChange={this.changeContent.bind(this)} placeholder="Search for..." />
-                        <span className="input-group-btn">
-                            <button className="btn btn-default" type="button" onClick={()=>this.props.addTodo(this.state.task)}>Go!</button>
-                        </span>
-                    </div>
-                </div>
-                <br/>
-                <div className="row">
+
+            <div className="row">
+                <div className="col col-xs-12">
                     <ul className="media-list">
-                        {this.renderData()}
+                        {this.renderData() }
                     </ul>
                 </div>
             </div>
+
 
         );
     }
@@ -92,8 +85,8 @@ function mapStateToProps(state) {
 
 // Get actions and pass them as props to to UserList
 //      > now UserList has this.props.selectUser
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({addTodo: addTodo,completeTask:completeTask, fetchPosts:fetchPosts }, dispatch);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ addTodo: addTodo, completeTask: completeTask, fetchPosts: fetchPosts }, dispatch);
 }
 
 // We don't want to return the plain UserList (component) anymore, we want to return the smart Container
