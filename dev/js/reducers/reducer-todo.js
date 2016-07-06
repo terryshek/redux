@@ -4,6 +4,7 @@
  * */
 import axios from 'axios';
 import {data} from '../mock-data/dataSouce.js';
+import _ from "lodash";
 
 let nextTodoId = 4
 export default (state = [], action) =>{
@@ -13,7 +14,7 @@ export default (state = [], action) =>{
             console.log("action : 'RECEIVE_POSTS_SUCCESS'")
             console.log(state)
             console.log(action.data)
-            return  action.data;
+            return  _.union(state,action.data);
             break;
         case 'ADD_TODO':
             console.log("action : 'ADD_TODO'")
