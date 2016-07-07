@@ -96,11 +96,11 @@ function mapStateToProps(state) {
 //      > now UserList has this.props.selectUser
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        addTodo: addTodo,
-        completeTask: completeTask,
-        fetchPosts: fetchPosts,
-        sortingList: sortingList,
-        orderby: orderby
+        addTodo,
+        completeTask,
+        fetchPosts,
+        sortingList,
+        orderby
     }, dispatch);
 }
 

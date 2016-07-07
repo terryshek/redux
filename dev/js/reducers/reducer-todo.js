@@ -3,7 +3,6 @@
  * You need to return something, so if there are no users then just return an empty array
  * */
 import axios from 'axios';
-import {data} from '../mock-data/dataSouce.js';
 import _ from "lodash";
 
 let nextTodoId = 4
