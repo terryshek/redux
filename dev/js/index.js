@@ -8,6 +8,7 @@ import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 import allReducers from './reducers';
 import App from './components/App.js';
+require("jquery");
 const logger = createLogger();
 
 const store = createStore(

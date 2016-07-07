@@ -51,8 +51,6 @@ class TodoList extends Component {
         return (
             <div className="row">
                 <div className="col col-xs-12">
-                    <h2>GitHub List</h2>
-
                     <div className="row">
                         <div className="col-xs-12">
                             <ul className="nav nav-pills">
