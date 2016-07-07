@@ -50,7 +50,7 @@ class TodoList extends Component {
         const { sortingList, orderby } =this.props
         return (
             <div className="row">
-                <div className="col col-xs-12 col-md-6">
+                <div className="col col-xs-12">
                     <h2>GitHub List</h2>
 
                     <div className="row">
@@ -61,7 +61,7 @@ class TodoList extends Component {
                                 <li role="presentation" className={this.activeType("Organization")}><a
                                     onClick={()=>sortingList("Organization")}>Organization</a></li>
                                 <li role="presentation">
-                                    <button type="button" style={{"paddingRight":"10px"}}
+                                    <button type="button" style={{"margin":"5px auto"}}
                                             className="btn btn-default btn-small"
                                             onClick={this.orderByList.bind(this)}>
                                         <span style={{"padding":"5px"}}>Sorting ID</span>
