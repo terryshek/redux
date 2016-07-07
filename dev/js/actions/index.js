@@ -9,6 +9,21 @@ export const selectUser = (user) => {
         payload: user
     }
 };
+export const sortingList = (type) => {
+    console.log("You clicked on sorting by : ", type);
+    return {
+        type: 'SORTING_LIST',
+        payload: type
+    }
+};
+export const orderby = (type) => {
+    console.log("You clicked on sorting by : ", type);
+    return {
+        type: 'ORDER_BY',
+        payload: type
+    }
+};
+
 // start fetch data
 export const fetchPosts = (url) => {
     console.log("Fetch Post task : ", url);

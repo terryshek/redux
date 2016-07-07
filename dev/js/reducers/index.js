@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import UserReducer from './reducer-users';
-import todos from './reducer-todo';
+import {todoList, sortingList} from './reducer-todo';
 
 import ActiveUserReducer from './reducer-active-user';
 
@@ -12,8 +12,9 @@ import ActiveUserReducer from './reducer-active-user';
 
 const allReducers = combineReducers({
     users: UserReducer,
-    todos: todos,
+    todos: todoList,
     activeUser: ActiveUserReducer,
+    type:sortingList
 });
 
 export default allReducers

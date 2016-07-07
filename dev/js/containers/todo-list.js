@@ -1,31 +1,26 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
-import { addTodo, completeTask, fetchPosts } from '../actions/index'
-import { getData } from "../mock-data/initialData"
+//action
+import { addTodo, completeTask, fetchPosts, sortingList, orderby} from '../actions/index'
 
 const myStyle = {
     "textDecoration": "line-through"
 }
 class TodoList extends Component {
     componentWillMount() {
-        console.log(this.props)
         this.props.fetchPosts('https://api.github.com/users');
     }
+
     constructor(props) {
         super(props);
         this.state = {
-            task: ""
+            orderById: 'asc'
         };
-    }
-    changeContent(e) {
-        this.setState({ task: e.target.value })
-        console.log(this.state)
     }
     renderData() {
         return this.props.todos.map((list, index) => {
-            return (
+            return (list.type == this.props.type) ? (
                 <li className="media" key={list.id}>
                     <div className="media-left">
                         <img src={list.avatar_url} alt="avatar_url" className="media-object" width="64px"/>
@@ -37,35 +32,48 @@ class TodoList extends Component {
                         </a>
                     </div>
                 </li>
-            );
+            ) : "";
         })
     }
 
+    activeType(type) {
+        return (type == this.props.type) ? "active" : "";
+    }
 
-    renderList() {
-        console.log(this.props)
-        return this.props.todos.map((todo, index) => {
-            return (
-                <li className="list-group-item" style={todo.complete ? myStyle : {}}
-                    key={todo.id}
-                    >
-                    <button onClick={() => this.props.completeTask(todo.id) } type="button" className="btn btn-primary btn-xs pull-left">Complete</button>
-
-                    <span className="badge">{todo.complete ? "true" : "false"}</span>
-                    <div>{todo.tasks} --assigner: {todo.assigner}</div>
-                </li>
-            );
-        });
+    orderByList() {
+        this.setState({"orderById": (this.state.orderById == 'asc') ? 'desc' : 'asc'});
+        this.props.orderby(this.state.orderById);
     }
 
     render() {
+        const { sortingList, orderby } =this.props
         return (
-
             <div className="row">
                 <div className="col col-xs-12">
-                    <ul className="media-list">
+                    <h2>GitHub List</h2>
+
+                    <div className="row">
+                        <div className="col-xs-10">
+                            <ul className="nav nav-pills">
+                                <li role="presentation" className={this.activeType("User")}><a
+                                    onClick={()=>sortingList("User")}>User</a></li>
+                                <li role="presentation" className={this.activeType("Organization")}><a
+                                    onClick={()=>sortingList("Organization")}>Organization</a></li>
+                            </ul>
+                        </div>
+                        <div className="col-xs-2">
+                            <button type="button" className="btn btn-default btn-small"
+                                    onClick={this.orderByList.bind(this)}>
+                                <span className="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <ul className="media-list list">
                         {this.renderData() }
                     </ul>
+
                 </div>
             </div>
 
@@ -79,14 +87,21 @@ class TodoList extends Component {
 //      > whenever state changes, the UserList will automatically re-render
 function mapStateToProps(state) {
     return {
-        todos: state.todos
+        todos: state.todos,
+        type: state.type
     };
 }
 
 // Get actions and pass them as props to to UserList
 //      > now UserList has this.props.selectUser
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ addTodo: addTodo, completeTask: completeTask, fetchPosts: fetchPosts }, dispatch);
+    return bindActionCreators({
+        addTodo: addTodo,
+        completeTask: completeTask,
+        fetchPosts: fetchPosts,
+        sortingList: sortingList,
+        orderby: orderby
+    }, dispatch);
 }
 
 // We don't want to return the plain UserList (component) anymore, we want to return the smart Container
