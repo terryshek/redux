@@ -18,6 +18,7 @@ class TodoList extends Component {
             orderById: 'asc'
         };
     }
+
     renderData() {
         return this.props.todos.map((list, index) => {
             return (list.type == this.props.type) ? (
@@ -49,23 +50,26 @@ class TodoList extends Component {
         const { sortingList, orderby } =this.props
         return (
             <div className="row">
-                <div className="col col-xs-12">
+                <div className="col col-xs-12 col-md-6">
                     <h2>GitHub List</h2>
 
                     <div className="row">
-                        <div className="col-xs-10">
+                        <div className="col-xs-12">
                             <ul className="nav nav-pills">
                                 <li role="presentation" className={this.activeType("User")}><a
                                     onClick={()=>sortingList("User")}>User</a></li>
                                 <li role="presentation" className={this.activeType("Organization")}><a
                                     onClick={()=>sortingList("Organization")}>Organization</a></li>
+                                <li role="presentation">
+                                    <button type="button" style={{"paddingRight":"10px"}}
+                                            className="btn btn-default btn-small"
+                                            onClick={this.orderByList.bind(this)}>
+                                        <span style={{"padding":"5px"}}>Sorting ID</span>
+                                        <span className="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                    </button>
+                                </li>
                             </ul>
-                        </div>
-                        <div className="col-xs-2">
-                            <button type="button" className="btn btn-default btn-small"
-                                    onClick={this.orderByList.bind(this)}>
-                                <span className="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                            </button>
+
                         </div>
                     </div>
                     <br/>
